@@ -4,6 +4,45 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.5] — 2026-05-14  "Lockstep"
+
+**Headline:** Pure lockstep version bump. No source changes.
+
+The plugin and web halves both ship v0.6.5 with meaningful work
+this release — plugin gets the critical HQ-offset
+`InventoryReader` fix ("Crafted Visible"), web wires the
+previously-stub Meld Audit panel rows and adds a Sell / replace
+verdict row ("Audit lit up"). The shared `JobPriorities`,
+`MateriaTiers`, and `StatNames` tables don't need any changes to
+support either piece of work.
+
+The strict-lockstep policy (every release bumps all three even
+when one side is a no-op) means Core ships v0.6.5 anyway, so when
+someone runs `/ttinfo` and sees `Plugin: 0.6.5 / Core: 0.6.5 /
+Web: 0.6.5` the version trio matches and there's no "did the
+library land?" question to ask.
+
+### Changed
+
+- **`GearGoblin.Core.csproj`** — version `0.6.4 → 0.6.5`,
+  Description updated to reflect the lockstep-only nature of this
+  release.
+
+### Unchanged (carried forward from v0.6.4)
+
+- `JobPriorities.cs` — per-job stat priority tables for all 21
+  combat jobs (plus BLU).
+- `MateriaTiers.cs` — Tier I–XII materia stat values; Skill Speed
+  prefix is "Quickarm" (corrected from v0.6.3 "Piety" stub).
+- `StatNames.cs` — BaseParam name canonicalization.
+
+### Pairing
+
+- **GearGoblin plugin v0.6.5** — "Crafted Visible".
+- **TonberryTactics web v0.6.5** — "Audit lit up".
+
+---
+
 ## [0.6.4] — 2026-05-14  "Quickarm Correction"
 
 **Headline:** Fixes the v0.6.3 known-stub where Skill Speed materia
