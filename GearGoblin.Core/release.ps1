@@ -5,6 +5,9 @@
 
 $ErrorActionPreference = 'Stop'
 
+$logPath = Join-Path $PSScriptRoot "release-error.log"
+Start-Transcript -Path $logPath -Append -Force -ErrorAction SilentlyContinue | Out-Null
+
 Write-Host ""
 Write-Host "=================================================="
 Write-Host "  release.ps1"
@@ -109,3 +112,5 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ""
 Write-Host "Release $tag pushed."
+
+Stop-Transcript -ErrorAction SilentlyContinue | Out-Null

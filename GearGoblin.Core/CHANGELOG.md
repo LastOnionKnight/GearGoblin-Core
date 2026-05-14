@@ -4,6 +4,66 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.4] — 2026-05-14  "Quickarm Correction"
+
+**Headline:** Fixes the v0.6.3 known-stub where Skill Speed materia
+recommendations surfaced as "Piety Materia XII" instead of the
+correct in-game item name "Quickarm Materia XII". Cosmetic — affects
+only the display string, not the priority math or stat values — but
+visibly wrong for any physical-DPS or tank job whose priority list
+hit the Skill Speed slot. Tracked since the overnight v0.6.3 ship.
+
+Lockstep version bump alongside plugin v0.6.4. Web v0.6.4 already
+shipped (vendored Core source approach to work around Cloudflare
+Pages' inability to resolve sibling-repo ProjectReferences); web's
+vendored copy of MateriaTiers.cs still carries the v0.6.3 stub and
+will sync to v0.6.4's content on web's next release.
+
+### Fixed
+
+- **`MateriaTiers.MateriaPrefix("Skill Speed")`** — returns
+  `"Quickarm"` (correct) rather than `"Piety"` (placeholder). Piety
+  materia keeps its own correct prefix (`"Piety"`); the two were
+  transposed in v0.6.3's overnight ship and have been swapped to
+  their proper assignments. Verified against current FFXIV item-name
+  data for patch 7.5.
+
+### Changed
+
+- **`release.ps1`** — adds persistent error log via `Start-Transcript`
+  / `Stop-Transcript`. Output appends to `release-error.log` alongside
+  the script, capturing both stdout and stderr through the full run
+  including any failure path. Matches the pattern landing in
+  TonberryTactics/release.ps1 and GearGoblin/release.ps1 (the
+  plugin-side script ships alongside plugin v0.6.4).
+- **`GearGoblin.Core.csproj`** — version `0.6.3 → 0.6.4`, Description
+  refreshed for "Quickarm Correction".
+
+### Pairing
+
+- **GearGoblin plugin v0.6.4** — ships alongside this release.
+  Plugin's existing ProjectReference to Core picks up the
+  corrected prefix automatically on next build; `/goblin → /tt`
+  regression at line 730 of `StatusPanelInjector.cs` (v0.4.7.1 brand
+  convergence miss) also lands in plugin v0.6.4.
+- **TonberryTactics web v0.6.4** — already shipped with the v0.6.3
+  vendored copy of `MateriaTiers.cs`. The Skill Speed prefix bug
+  remains visible on the live web (cosmetic only) until web v0.6.5
+  syncs the vendored copies to match this Core release.
+
+### Known stubs still in flight
+
+- **Per-job stat-cap awareness** — no breakpoint or stat-cap math in
+  Core yet. The optimizer recommends Tier XII into any empty slot
+  without checking whether it would overcap. Plugin's MeldOptimizer
+  handles this via in-game BaseParam read; Core / web stack will
+  need its own implementation. Targeted at v0.8.x Balance-mode work.
+- **Priority table currency** — patch 7.x Dawntrail tier values
+  baked in. Major-patch updates will need refresh sweeps against
+  the latest thebalanceffxiv.com guides.
+
+---
+
 ## [0.6.3] — 2026-05-14  "Lockstep"
 
 **Headline:** Initial public release. Extracts shared business logic 

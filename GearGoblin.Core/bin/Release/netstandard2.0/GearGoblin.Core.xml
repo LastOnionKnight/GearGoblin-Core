@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GearGoblin.Core</name>
+    </assembly>
+    <members>
+        <member name="T:GearGoblin.Core.JobPriorities">
+            <summary>
+            Per-job materia stat-priority tables. Look up via
+            <see cref="M:GearGoblin.Core.JobPriorities.For(System.String)"/> using a job's three-letter abbreviation
+            (PLD, WAR, GNB, WHM, ...). Falls back to a role-derived default for
+            unrecognized abbreviations (e.g. a future job we haven't tabled yet).
+            </summary>
+        </member>
+        <member name="F:GearGoblin.Core.JobPriorities.JobTable">
+            <summary>
+            Job abbreviation → priority list. Twenty-one combat jobs (Endwalker
+            roster + Dawntrail additions VPR + PCT). Each list is ordered from
+            highest priority to lowest; the optimizer rotates through it once
+            per empty materia slot. Stat names use FFXIV in-game BaseParam
+            display strings (with "Direct Hit Rate" rather than "Direct Hit")
+            so callers don't need to re-canonicalize.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.JobPriorities.For(System.String)">
+            <summary>
+            Resolve the stat-priority list for the given job abbreviation.
+            Returns a defensive copy so callers can iterate without holding a
+            reference to the internal table. If the job isn't tabled (e.g. a
+            new job from a future patch we haven't seen yet), falls back to
+            the GNB tank priority — the same fallback the v0.6.0/0.6.1/0.6.2
+            web shipped, so unrecognised jobs keep working the way they used
+            to instead of erroring.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.JobPriorities.IsTableHit(System.String)">
+            <summary>
+            Whether the given job has a real entry in the priority table.
+            False means callers got the fallback (GNB tank baseline) from
+            <see cref="M:GearGoblin.Core.JobPriorities.For(System.String)"/>. UI surfaces should display a clear "fallback"
+            indicator so users know recommendations aren't job-tuned.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.JobPriorities.SourceLabel(System.String)">
+            <summary>
+            Human-readable description of the priority source. Surfaced in
+            the web's Materia Advisor badge ("AST priority", "GNB FALLBACK
+            (no table for XYZ)", etc.) and in the plugin's About tab.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.JobPriorities.AllTabledJobs">
+            <summary>
+            All job abbreviations with table entries. Useful for diagnostics
+            and for the Settings tab when it eventually lets users browse
+            and override priorities.
+            </summary>
+        </member>
+        <member name="T:GearGoblin.Core.MateriaTiers">
+            <summary>
+            Materia grade → stat value lookup. Grades are 1-indexed (Grade 1 =
+            Tier I, Grade 12 = Tier XII). Stat values shown here are for
+            substat materia (Crit, DH, Det, SkS, SpS, Ten, Pie) — the only
+            materia kinds the optimizer recommends.
+            </summary>
+        </member>
+        <member name="F:GearGoblin.Core.MateriaTiers.CurrentCapTier">
+            <summary>
+            Current cap tier — the highest tier worth recommending in patch
+            7.x. Updated each major patch.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.MateriaTiers.SubstatValue(System.Int32)">
+            <summary>
+            Substat stat-value at a given tier. Returns the Tier XII value
+            for out-of-range tiers so callers don't crash on bad input.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.MateriaTiers.RomanNumeral(System.Int32)">
+            <summary>
+            Convert a tier number to its roman-numeral name suffix, e.g.
+            <c>RomanNumeral(12) == "XII"</c>. Used by the optimizer to
+            build the materia name string ("Savage Aim Materia XII").
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.MateriaTiers.NameOf(System.String,System.Int32)">
+            <summary>
+            Build the in-game materia name for a stat at a tier, e.g.
+            <c>NameOf("Critical Hit", 12) == "Savage Aim Materia XII"</c>.
+            Names match the in-game item display strings.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.MateriaTiers.MateriaPrefix(System.String)">
+             <summary>
+             Materia prefix per stat — the words that go in front of "Materia
+             XII" to form the in-game item name. Casters and tanks share the
+             same materia for any given substat (a Critical Hit materia is a
+             Critical Hit materia regardless of who melds it), so this is a
+             pure stat-to-prefix lookup.
+            
+             <para>v0.6.4 — Skill Speed prefix corrected from "Piety" to
+             "Quickarm" (the actual in-game item name). The v0.6.3 stub used
+             "Piety" as a placeholder during overnight Core ship; this is
+             the proper value. Piety has its own materia ("Piety") and Skill
+             Speed has "Quickarm"; the two were transposed.</para>
+             </summary>
+        </member>
+        <member name="M:GearGoblin.Core.MateriaTiers.AllTiers">
+            <summary>
+            All tiers we have stat values for. Iteration order is 1 → 12.
+            </summary>
+        </member>
+        <member name="T:GearGoblin.Core.StatNames">
+            <summary>
+            Canonicalize FFXIV substat names to a three-letter key. Accepts the
+            abbreviated form ("CRT", "DH", "DET", "SKS", "SPS", "TEN", "PIE"),
+            the in-game BaseParam display name ("Critical Hit", "Direct Hit Rate",
+            "Determination", "Skill Speed", "Spell Speed", "Tenacity", "Piety"),
+            and common variants (case-insensitive, whitespace-stripped, with
+            or without "Rate" suffix on Direct Hit).
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.StatNames.Canonical(System.String)">
+             <summary>
+             Convert any plugin-emitted or hand-typed substat name into its
+             canonical three-letter form. Returns an empty string for
+             null/whitespace input and the uppercased input verbatim for
+             anything we don't recognise — callers can then decide whether
+             an unrecognised stat name is a parse error or just an unfamiliar
+             future addition.
+            
+             <para>Examples:</para>
+             <list type="bullet">
+             <item><c>Canonical("Critical Hit")</c> → <c>"CRT"</c></item>
+             <item><c>Canonical("crt")</c> → <c>"CRT"</c></item>
+             <item><c>Canonical("Direct Hit Rate")</c> → <c>"DH"</c></item>
+             <item><c>Canonical("DirectHit")</c> → <c>"DH"</c></item>
+             <item><c>Canonical("Spell Speed")</c> → <c>"SPS"</c></item>
+             <item><c>Canonical(null)</c> → <c>""</c></item>
+             </list>
+             </summary>
+        </member>
+        <member name="M:GearGoblin.Core.StatNames.DisplayName(System.String)">
+            <summary>
+            Reverse of <see cref="M:GearGoblin.Core.StatNames.Canonical(System.String)"/> — go from canonical key to
+            the in-game BaseParam display name, which is what gets written
+            into <c>ExportMateriaV1.StatName</c> on the wire and into the
+            in-game character panel rows.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.StatNames.IsKnown(System.String)">
+            <summary>
+            Whether <paramref name="canonicalKey"/> is one of the seven
+            known substat keys. Useful for filtering wire payloads.
+            </summary>
+        </member>
+        <member name="M:GearGoblin.Core.StatNames.IsSpeed(System.String)">
+            <summary>
+            Is this stat a "Speed" stat (Skill Speed or Spell Speed)?
+            Used by the role-aware Stat Profile grid to pick which one to
+            show in the speed slot.
+            </summary>
+        </member>
+    </members>
+</doc>
