@@ -1,0 +1,8 @@
+﻿[Bb]in/
+[Oo]bj/
+*.log
+*.user
+*.suo
+.vs/
+.vscode/
+*-dropin.zip
