@@ -1,29 +1,26 @@
-# GearGoblin.Core v0.6.5 dropin — "Lockstep"
+# GearGoblin.Core v0.6.5.1 dropin — "Lockstep"
 
 **Headline:** Pure lockstep version bump. No source changes.
 
-Plugin v0.6.5 ("Crafted Visible") and web v0.6.5 ("Audit lit up")
-both ship meaningful work without needing Core changes — the
-existing `JobPriorities`, `MateriaTiers`, and `StatNames` tables
-already support what both halves do this release. Core bumps
-anyway to keep the strict-lockstep invariant (every release bumps
-all three components even when one side is a no-op).
+Plugin v0.6.5.1 ("Quiet Info") and web v0.6.5.1 ("Audit reads right")
+both ship meaningful work without needing Core changes. Core bumps
+anyway to keep the strict-lockstep invariant.
 
 ## What's in this dropin
 
 ```
-GearGoblin.Core.csproj    overwrite — version 0.6.4 → 0.6.5
-CHANGELOG.md              overwrite — v0.6.5 entry on top
+GearGoblin.Core.csproj    overwrite — version 0.6.5 → 0.6.5.1
+CHANGELOG.md              overwrite — v0.6.5.1 entry on top
 ```
 
-That's it. Two files.
+Two files. That's it.
 
 ## Build & deploy
 
 ```
 cd D:\GearGoblin-Core-v0.1\GearGoblin.Core
-Move-Item $env:USERPROFILE\Downloads\GearGoblin.Core-v0.6.5-dropin.zip ..\ -Force
-Expand-Archive -Path ..\GearGoblin.Core-v0.6.5-dropin.zip -DestinationPath . -Force
+Move-Item $env:USERPROFILE\Downloads\GearGoblin.Core-v0.6.5.1-dropin.zip ..\ -Force
+Expand-Archive -Path ..\GearGoblin.Core-v0.6.5.1-dropin.zip -DestinationPath . -Force
 Unblock-File .\release.ps1
 git status
 dotnet build -c Release
@@ -34,18 +31,16 @@ dotnet build -c Release
 ## Verify after push
 
 1. `Get-Content GearGoblin.Core.csproj | Select-String "Version"` should
-   show `<Version>0.6.5</Version>` and `0.6.5.0` AssemblyVersion / FileVersion.
-2. `git log --oneline -5` should show the v0.6.5 commit on top.
-3. `dotnet build -c Release` should complete with no warnings or errors.
+   show `<Version>0.6.5.1</Version>` and `0.6.5.1.0` AssemblyVersion / FileVersion.
+2. `dotnet build -c Release` should complete with no warnings or errors.
 
 ## Pairing
 
-- **GearGoblin plugin v0.6.5** — "Crafted Visible". Critical
-  HQ-offset `InventoryReader` fix.
-- **TonberryTactics web v0.6.5** — "Audit lit up". Real audit
-  logic + Sell/replace verdict row.
+- **GearGoblin plugin v0.6.5.1** — "Quiet Info". `/ttinfo` crash fix
+  + About-tab What's New trim.
+- **TonberryTactics web v0.6.5.1** — "Audit reads right". Off-by-one
+  Tier XII display fix.
 
-Ship order doesn't matter for this release since Core has no
-source changes — none of the consumers' compile-time references
-change. But by convention, ship Core first so the version trio is
-visible in any subsequent debugging.
+Ship order doesn't matter mechanically (no consumers' compile-time
+references change), but by convention ship **Core → Plugin → Web**
+so version trios are consistent at every intermediate state.

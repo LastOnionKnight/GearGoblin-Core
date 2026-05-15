@@ -4,6 +4,43 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.5.1] — 2026-05-14  "Lockstep"
+
+**Headline:** Pure lockstep version bump. No source changes.
+
+Plugin v0.6.5.1 ("Quiet Info") ships the `/ttinfo` hard-crash hotfix
+and the About-tab "What's New" trim. Web v0.6.5.1 ("Audit reads
+right") ships the off-by-one Tier display fix. Neither needs Core
+changes — the existing `JobPriorities`, `MateriaTiers`, and `StatNames`
+tables continue to work unchanged. Core bumps anyway to maintain the
+strict-lockstep invariant so `/ttinfo` shows `Plugin: 0.6.5.1 /
+Core: 0.6.5.1 / Web: 0.6.5.1` matching.
+
+### Changed
+
+- **`GearGoblin.Core.csproj`** — version `0.6.5 → 0.6.5.1`,
+  Description updated to reflect the lockstep-only nature of this
+  release and the pairing notes for plugin and web.
+
+### Unchanged (carried forward from v0.6.5)
+
+- `JobPriorities.cs` — per-job stat priority tables for all 21
+  combat jobs (plus BLU).
+- `MateriaTiers.cs` — Tier I–XII materia stat values; `CurrentCapTier
+  = 12` (note: this is 1-indexed, while plugin's wire-format `Grade`
+  field is 0-indexed. The off-by-one fix in web v0.6.5.1 lives at the
+  consumer, not here; this comment exists for future maintainers).
+- `StatNames.cs` — BaseParam name canonicalization.
+
+### Pairing
+
+- **GearGoblin plugin v0.6.5.1** — "Quiet Info". `/ttinfo` crash fix
+  + About-tab What's New trim.
+- **TonberryTactics web v0.6.5.1** — "Audit reads right". Off-by-one
+  Tier XII display fix.
+
+---
+
 ## [0.6.5] — 2026-05-14  "Lockstep"
 
 **Headline:** Pure lockstep version bump. No source changes.
