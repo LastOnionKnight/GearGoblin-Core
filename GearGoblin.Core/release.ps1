@@ -5,9 +5,6 @@
 
 $ErrorActionPreference = 'Stop'
 
-$logPath = Join-Path $PSScriptRoot "release-error.log"
-Start-Transcript -Path $logPath -Append -Force -ErrorAction SilentlyContinue | Out-Null
-
 Write-Host ""
 Write-Host "=================================================="
 Write-Host "  release.ps1"
@@ -37,6 +34,31 @@ Write-Host ""
 # ── Git branch sanity ─────────────────────────────────────
 $branch = (git rev-parse --abbrev-ref HEAD).Trim()
 Write-Host "  Branch:   $branch"
+Write-Host ""
+
+# ── Sync with remote (v0.6.5.2+) ──────────────────────────
+#
+# Fetch + rebase before staging. Even though Core has no automated
+# upstream pushes (unlike Plugin which has the repo.json bot), we keep
+# this step symmetric across all three release scripts so the workflow
+# is identical wherever you run it. --autostash handles working-tree
+# dropin changes during the rebase.
+
+Write-Host "Syncing with origin/$branch (fetch + rebase + autostash)..."
+git fetch origin $branch
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "ERROR: git fetch failed." -ForegroundColor Red
+    exit 1
+}
+git pull --rebase --autostash origin $branch
+if ($LASTEXITCODE -ne 0) {
+    Write-Host ""
+    Write-Host "ERROR: git pull --rebase failed." -ForegroundColor Red
+    Write-Host "If the rebase aborted mid-way (conflict), resolve manually:" -ForegroundColor Yellow
+    Write-Host "  git status        # see what's conflicting" -ForegroundColor Yellow
+    Write-Host "  git rebase --abort   # back out cleanly" -ForegroundColor Yellow
+    exit 1
+}
 Write-Host ""
 
 # ── Show pending changes ──────────────────────────────────
@@ -112,5 +134,3 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ""
 Write-Host "Release $tag pushed."
-
-Stop-Transcript -ErrorAction SilentlyContinue | Out-Null

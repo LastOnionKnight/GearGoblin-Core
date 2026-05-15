@@ -4,6 +4,45 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.5.2] — 2026-05-14  "Release Hardening"
+
+**Headline:** Pure lockstep version bump. No source changes to the
+library.
+
+The release.ps1 script gains a `git fetch + pull --rebase --autostash`
+preamble that keeps the workflow symmetric with Plugin and Web. Core
+itself has no automated upstream pushes that would force this step
+(Plugin has the repo.json auto-bot; Web has Cloudflare Pages builds
+that don't push back), but the symmetry matters: every release script
+in the trio should behave identically so muscle memory carries across
+all three workspaces.
+
+### Changed
+
+- **`release.ps1`** — new "sync with remote" step between branch
+  detection and the build gate. `git fetch origin <branch>` then
+  `git pull --rebase --autostash origin <branch>`. Same shape as
+  Plugin and Web.
+- **`GearGoblin.Core.csproj`** — version `0.6.5.1 → 0.6.5.2`,
+  Description updated for "Release Hardening".
+
+### Unchanged (carried forward from v0.6.5)
+
+- `JobPriorities.cs`, `MateriaTiers.cs`, `StatNames.cs` — Core
+  library content unchanged.
+
+### Pairing
+
+- **GearGoblin plugin v0.6.5.2** — same `release.ps1` sync step; the
+  critical destination for the rebase pattern because of the
+  repo.json bot.
+- **TonberryTactics web v0.6.5.2** — same sync step **plus** the
+  build gate that web's `release.ps1` was missing; plus the
+  EVERCOLD wordmark wrapped in an external link to the official
+  FFXIV Evercold expansion page.
+
+---
+
 ## [0.6.5.1] — 2026-05-14  "Lockstep"
 
 **Headline:** Pure lockstep version bump. No source changes.
