@@ -11,12 +11,12 @@
     <AssemblyName>GearGoblin.Core</AssemblyName>
     <RootNamespace>GearGoblin.Core</RootNamespace>
 
-    <Version>0.6.5.2</Version>
-    <AssemblyVersion>0.6.5.2</AssemblyVersion>
-    <FileVersion>0.6.5.2</FileVersion>
+    <Version>0.6.5.3</Version>
+    <AssemblyVersion>0.6.5.3</AssemblyVersion>
+    <FileVersion>0.6.5.3</FileVersion>
     <PackageId>GearGoblin.Core</PackageId>
     <Authors>LastOnionKnight</Authors>
-    <Description>Shared business-logic library for Tonberry Tactics — the web app (Blazor WASM) and the in-game plugin (Dalamud) both project-reference this library so their stat-priority tables, materia-tier values, and stat-name canonicalization don't drift. Targets netstandard2.0 for maximum compatibility with both halves (web builds on net8+, plugin builds on net10.0-windows). v0.6.5.2 ("Release Hardening") is a lockstep version bump only — no source changes to the library. The Core release.ps1 script gains a `git fetch + pull --rebase --autostash` preamble that keeps the workflow symmetric with Plugin and Web (both of which need the rebase step for non-fast-forward avoidance, particularly Plugin where the repo.json auto-bot pushes after every tag). Plugin v0.6.5.1 ("Quiet Info") is a hotfix for the /ttinfo hard-crash latent since v0.4.6 (the foreach-over-Split chat-dump pattern could marshal an empty entry into a null Utf8String.SetString source pointer and crash the game from ChatGui.UpdateQueue) and also trims the About-tab "What's New" section to the latest three releases. Web v0.6.5.1 ("Audit reads right") fixes an off-by-one in the v0.6.5 audit logic that was rendering Tier XII melds as "XI" and flagging them all as under-tier (wire Grade field is 0-indexed; web now adds 1 at the consumer). Library contents unchanged: JobPriorities (per-job stat priority for materia melding), MateriaTiers (Tier I–XII stat values), StatNames (BaseParam name canonicalization).</Description>
+    <Description>Shared computational core for Tonberry Tactics — materia formulas, job profiles, gearset DTOs, level/stat tables, meld optimizer primitives. Targets netstandard2.0 so it links into both the Dalamud plugin (net10.0-windows) and the Blazor WASM web companion. v0.6.5.3 is a version-only lockstep bump pairing with the plugin's "Collision Fix" hotfix that corrects the character-panel ghost-text bug v0.6.5.2 misdiagnosed. No source changes in Core; the lockstep convention (Plugin = Core = Web at every release) means Core ships a tag whenever any component ships one.</Description>
     <Copyright>(c) 2026 LastOnionKnight / Refia Rakkiri / Aisling O'Callaghan</Copyright>
     <RepositoryUrl>https://github.com/LastOnionKnight/GearGoblin-Core</RepositoryUrl>
     <PackageProjectUrl>https://github.com/LastOnionKnight/GearGoblin-Core</PackageProjectUrl>

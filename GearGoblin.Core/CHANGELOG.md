@@ -4,6 +4,31 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.5.3] — 2026-05-16  "Collision Fix"
+
+**Headline:** Pure lockstep version bump. No source changes to the
+library.
+
+**Pairing with:** Plugin v0.6.5.3 ships the real fix for the
+character-panel ghost-text bug that v0.6.5.2 misdiagnosed. Adding an
+`expandCollisionNode` parameter to `StatusPanelInjector.AddStatRow`
+matches the upstream CharacterPanelRefined pattern we adapted from and
+removes collision-node growth on rows that inject into the Gear /
+Average Item Level component. Same release also lands four `/goblin`
+→ `/tt` brand-convergence fixes the v0.5.x sweep missed in
+StatusPanelInjector. Web (TonberryTactics v0.6.5.3) is also a
+version-only bump.
+
+### Why Core bumps when it has no changes
+
+Lockstep is the project's release invariant — Plugin, Core, and Web
+must always carry the same version tag so consumers can reason about
+compatibility from a single number. Letting Core lag at 0.6.5.2 while
+Plugin moves to 0.6.5.3 breaks that invariant and complicates the
+matrix going forward. Version-only bumps are cheap.
+
+---
+
 ## [0.6.5.2] — 2026-05-14  "Release Hardening"
 
 **Headline:** Pure lockstep version bump. No source changes to the
