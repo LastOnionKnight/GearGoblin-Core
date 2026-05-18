@@ -4,6 +4,31 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.5.4] — 2026-05-18  "H6 Lockstep"
+
+**Pairing:** GearGoblin v0.6.5.4 (plugin) + TonberryTactics v0.6.5.4 (web).
+
+**Scope:** Version-only lockstep bump — no source changes to Core.
+
+**Why this version exists:** BUG-001 (Materia Advisor header ghost text)
+remains unfixed after three prior attempts. v0.6.5.4 is the plugin's
+fourth swing at it — testing hypothesis H6 (text overflow from the
+cloned label cell into the number cell's render zone). The plugin also
+unifies its `/ttinfo` and header-pill version strings under a single
+resolver. Core travels along to keep the trinity in lockstep.
+
+**Versioning note:** The letter-suffix experiment (v0.6.5.3a) is closed
+on the plugin side; all three repos go pure-numeric from v0.6.5.4
+onward. Letter-suffix versions caused friction with release.ps1 (tag
+from csproj Version) and the github-actions repo.json bot (semver
+parsing).
+
+**Mobile site:** Slides from its originally-scoped v0.6.5.4 slot to
+v0.6.6. The v0.6.5.x patch stream has been consumed by BUG-001
+stabilization; mobile is a feature, not a fix, and waits.
+
+---
+
 ## [0.6.5.3] — 2026-05-16  "Collision Fix"
 
 **Headline:** Pure lockstep version bump. No source changes to the
