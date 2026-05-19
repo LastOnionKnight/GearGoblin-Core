@@ -11,12 +11,12 @@
     <AssemblyName>GearGoblin.Core</AssemblyName>
     <RootNamespace>GearGoblin.Core</RootNamespace>
 
-    <Version>0.6.5.4</Version>
-    <AssemblyVersion>0.6.5.4</AssemblyVersion>
-    <FileVersion>0.6.5.4</FileVersion>
+    <Version>0.6.6.0</Version>
+    <AssemblyVersion>0.6.6.0</AssemblyVersion>
+    <FileVersion>0.6.6.0</FileVersion>
     <PackageId>GearGoblin.Core</PackageId>
     <Authors>LastOnionKnight</Authors>
-    <Description>GearGoblin.Core — formula/data library shared between the plugin and the web companion (netstandard2.0). v0.6.5.4 is a version-only lockstep bump — no source changes. The plugin side ships BUG-001 hypothesis H6 (advisor header label shortened to test text-overflow theory) and a /ttinfo version-string consistency fix; Core travels along for trinity coherence. Mobile site work, which had originally been scoped for v0.6.5.4, slides to v0.6.6 — the panel-bug saga has consumed the v0.6.5.x patch stream.</Description>
+    <Description>GearGoblin.Core — formula/data library shared between the plugin and the web companion (netstandard2.0). v0.6.6.0 is a version-only lockstep bump — no source changes. The plugin side ships BUG-001 hypothesis H6 (advisor header label shortened to test text-overflow theory) and a /ttinfo version-string consistency fix; Core travels along for trinity coherence. Mobile site work, which had originally been scoped for v0.6.6.0, slides to v0.6.6 — the panel-bug saga has consumed the v0.6.5.x patch stream.</Description>
     <Copyright>(c) 2026 LastOnionKnight / Refia Rakkiri / Aisling O'Callaghan</Copyright>
     <RepositoryUrl>https://github.com/LastOnionKnight/GearGoblin-Core</RepositoryUrl>
     <PackageProjectUrl>https://github.com/LastOnionKnight/GearGoblin-Core</PackageProjectUrl>
@@ -32,3 +32,4 @@
   </ItemGroup>
 
 </Project>
+
