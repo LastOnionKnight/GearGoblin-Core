@@ -4,6 +4,12 @@ All notable changes to GearGoblin.Core are documented here. Format
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), 
 versioning matches the web app and plugin (lockstep from v0.6.3 onward).
 
+## [0.6.7.6] — 2026-05-27  "Lockstep"
+
+**Headline:** Version lockstep bump to match Plugin v0.6.7.6 (mojibake hotfix). No source changes to Core.
+
+---
+
 ## [0.6.5.4] — 2026-05-18  "H6 Lockstep"
 
 **Pairing:** GearGoblin v0.6.5.4 (plugin) + TonberryTactics v0.6.5.4 (web).
