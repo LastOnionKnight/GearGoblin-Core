@@ -1,3 +1,7 @@
+## [1.1.0] - 2026-05-30
+### Changed
+- Refactored GearGoblin Core math. Lifted Materia logic from plugin and web app into GearGoblin.Core to guarantee parity.
+- Fixed substat cap bug where capped stats were being incorrectly recommended.
 # Changelog — GearGoblin.Core
 
 All notable changes to GearGoblin.Core are documented here. Format 
@@ -333,3 +337,4 @@ All three ship same date, same version, same release night.
   wrong; should be "Quickarm"). Cosmetic, fixed in v0.6.4.
 - **Settings-tab priority overrides** — users can't yet edit 
   priorities in-app. Planned for v0.7.x.
+
