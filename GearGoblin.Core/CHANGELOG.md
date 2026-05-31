@@ -1,3 +1,5 @@
+## [1.1.1] - 2026-05-31
+- Released for consumer-repo submodule consumption; no Core code changes from v1.1.0.
 ## [v1.1.1] - Submodule release; consumer repos now consume via ProjectReference from CI
 
 ## [1.1.0] - 2026-05-30
@@ -339,5 +341,6 @@ All three ship same date, same version, same release night.
   wrong; should be "Quickarm"). Cosmetic, fixed in v0.6.4.
 - **Settings-tab priority overrides** — users can't yet edit 
   priorities in-app. Planned for v0.7.x.
+
 
 
