@@ -11,9 +11,9 @@
     <AssemblyName>GearGoblin.Core</AssemblyName>
     <RootNamespace>GearGoblin.Core</RootNamespace>
 
-    <Version>1.1.0</Version>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0</FileVersion>
+    <Version>1.1.1</Version>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <FileVersion>1.1.1</FileVersion>
     <PackageId>GearGoblin.Core</PackageId>
     <Authors>LastOnionKnight</Authors>
     <Description>GearGoblin.Core — netstandard2.0 formula/data library shared between the Tonberry Tactics plugin and the web companion. v0.6.7.2 is a version-only lockstep bump (no source changes) restoring trinity coherence with plugin v0.6.7.2 and web v0.6.7.2. Wire-format/contract layer today; absorbs the materia optimizer math at v0.7.0.</Description>
@@ -32,5 +32,6 @@
   </ItemGroup>
 
 </Project>
+
 
 

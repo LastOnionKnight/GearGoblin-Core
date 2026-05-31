@@ -1,3 +1,5 @@
+## [v1.1.1] - Submodule release; consumer repos now consume via ProjectReference from CI
+
 ## [1.1.0] - 2026-05-30
 ### Changed
 - Refactored GearGoblin Core math. Lifted Materia logic from plugin and web app into GearGoblin.Core to guarantee parity.
@@ -337,4 +339,5 @@ All three ship same date, same version, same release night.
   wrong; should be "Quickarm"). Cosmetic, fixed in v0.6.4.
 - **Settings-tab priority overrides** — users can't yet edit 
   priorities in-app. Planned for v0.7.x.
+
 
