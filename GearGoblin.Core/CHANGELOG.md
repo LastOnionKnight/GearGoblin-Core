@@ -1,3 +1,13 @@
+## [1.5.7] - 2026-07-05
+
+### Added
+- Added `IconId` field to `MeldablePiece` to support native FFXIV UI texture retrieval without asset bundles.
+
+## [1.5.6] - 2026-07-05
+
+### Changed
+- Version bump for trinity lockstep (plugin Phase 4 ui overhaul).
+
 # Changelog
 
 ## [1.2.0] - 2026-06-01

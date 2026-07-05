@@ -32,6 +32,7 @@ public sealed class MeldablePiece
     public EquipSlot Slot      { get; init; }
     public string    Name      { get; init; } = "";
     public uint      ItemId    { get; init; }
+    public uint      IconId    { get; init; }
     public uint      ItemLevel { get; init; }
     public bool      IsHighQuality { get; init; }
     public List<MeldSlot> Slots { get; init; } = new();
