@@ -125,6 +125,17 @@ public static class MateriaCatalog
         "Spell Speed"    => Substat.SpellSpeed,
         "Tenacity"       => Substat.Tenacity,
         "Piety"          => Substat.Piety,
+        // v1.5.8 — DoH/DoL materia (Craftsman's Command/Cunning/Competence,
+        // Gatherer's Guerdon/Guile/Grasp). Values for existing melds come
+        // from Lumina StatValue at read time; the SubstatPerTier projection
+        // table stays battle-only because the optimizer doesn't recommend
+        // DoH/DoL melds yet.
+        "Craftsmanship"  => Substat.Craftsmanship,
+        "Control"        => Substat.Control,
+        "CP"             => Substat.CP,
+        "Gathering"      => Substat.Gathering,
+        "Perception"     => Substat.Perception,
+        "GP"             => Substat.GP,
         _                => Substat.None,
     };
 }

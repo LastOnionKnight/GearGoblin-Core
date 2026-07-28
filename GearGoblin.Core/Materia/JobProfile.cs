@@ -34,6 +34,13 @@ public static class JobProfiles
     private static readonly Substat[] TankCore  = { Substat.CriticalHit, Substat.DirectHit, Substat.Determination, Substat.SkillSpeed, Substat.Tenacity };
     private static readonly Substat[] HealCore  = { Substat.CriticalHit, Substat.Determination, Substat.SpellSpeed, Substat.Piety };
 
+    // v1.5.8 — DoH/DoL stat sets. RelevantStats keeps the meld audit honest
+    // (Craftsmanship on a crafter is NOT a wrong stat); BalanceWeights stay
+    // empty because the optimizer does not recommend DoH/DoL melds yet
+    // (deferred with the crafting-effect formulas, spec §Goal).
+    private static readonly Substat[] CrafterCore  = { Substat.Craftsmanship, Substat.Control, Substat.CP };
+    private static readonly Substat[] GathererCore = { Substat.Gathering, Substat.Perception, Substat.GP };
+
     // Conventional weights for endgame (verified against The Balance pinned posts, May 2026).
     // Crit is canonically the highest-value stat for nearly all damage-dealers.
     private static Dictionary<Substat, double> CritFirstDpsWeights() => new()
@@ -91,6 +98,19 @@ public static class JobProfiles
         [28] = new(28, "Scholar",     Role.Healer, HealCore, HealerWeights()),
         [33] = new(33, "Astrologian", Role.Healer, HealCore, HealerWeights()),
         [40] = new(40, "Sage",        Role.Healer, HealCore, HealerWeights()),
+        // Disciples of the Hand (ClassJob rowIDs 8-15)
+        [8]  = new(8,  "Carpenter",     Role.Crafter, CrafterCore, new()),
+        [9]  = new(9,  "Blacksmith",    Role.Crafter, CrafterCore, new()),
+        [10] = new(10, "Armorer",       Role.Crafter, CrafterCore, new()),
+        [11] = new(11, "Goldsmith",     Role.Crafter, CrafterCore, new()),
+        [12] = new(12, "Leatherworker", Role.Crafter, CrafterCore, new()),
+        [13] = new(13, "Weaver",        Role.Crafter, CrafterCore, new()),
+        [14] = new(14, "Alchemist",     Role.Crafter, CrafterCore, new()),
+        [15] = new(15, "Culinarian",    Role.Crafter, CrafterCore, new()),
+        // Disciples of the Land (ClassJob rowIDs 16-18)
+        [16] = new(16, "Miner",         Role.Gatherer, GathererCore, new()),
+        [17] = new(17, "Botanist",      Role.Gatherer, GathererCore, new()),
+        [18] = new(18, "Fisher",        Role.Gatherer, GathererCore, new()),
     };
 
     /// <summary>

@@ -110,6 +110,25 @@ public static class JobPriorities
         "Spell Speed",
     };
 
+    // v1.5.8 — DoH/DoL priorities. Community BiS convention orders
+    // Craftsmanship › Control › CP (and Gathering › Perception › GP);
+    // exact balance is recipe/node-dependent, but for the wrong-stat
+    // audit what matters is that these ARE the job's stats — a
+    // Craftsmanship meld on a Culinarian is correct, not a sell.
+    private static readonly string[] CrafterBaseline =
+    {
+        "Craftsmanship",
+        "Control",
+        "CP",
+    };
+
+    private static readonly string[] GathererBaseline =
+    {
+        "Gathering",
+        "Perception",
+        "GP",
+    };
+
     /// <summary>
     /// Job abbreviation → priority list. Twenty-one combat jobs (Endwalker
     /// roster + Dawntrail additions VPR + PCT). Each list is ordered from
@@ -157,6 +176,21 @@ public static class JobPriorities
             // baseline for completeness — gets fallback behaviour and
             // priority recs that won't be very useful in practice.
             ["BLU"] = MageBaseline,
+
+            // ── Disciples of the Hand ───────────────────────────────
+            ["CRP"] = CrafterBaseline,
+            ["BSM"] = CrafterBaseline,
+            ["ARM"] = CrafterBaseline,
+            ["GSM"] = CrafterBaseline,
+            ["LTW"] = CrafterBaseline,
+            ["WVR"] = CrafterBaseline,
+            ["ALC"] = CrafterBaseline,
+            ["CUL"] = CrafterBaseline,
+
+            // ── Disciples of the Land ───────────────────────────────
+            ["MIN"] = GathererBaseline,
+            ["BTN"] = GathererBaseline,
+            ["FSH"] = GathererBaseline,
         };
 
     /// <summary>

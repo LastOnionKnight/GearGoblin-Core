@@ -75,6 +75,14 @@ public static class MeldOptimizer
         JobProfile                   profile,
         WeightMode                   weightMode)
     {
+        // v1.5.8 — DoH/DoL jobs are display-only: no battle formulas apply,
+        // per-piece caps derive from battle columns (meaningless for crafting
+        // gear), and DoH/DoL materia values differ from the battle projection
+        // table. Their melds audit as informational "Solid" rows; plan
+        // recommendations wait on the crafting-effect formulas (spec §Goal).
+        if (profile.Role is Role.Crafter or Role.Gatherer)
+            return DisplayOnlyResult(pieces);
+
         var plan   = GeneratePlan(pieces, stats, mod, profile, weightMode);
         var audits = GenerateAudits(pieces, stats, mod, profile, weightMode);
         var totalGain = plan.Sum(r => r.ScoreGain);
@@ -85,6 +93,34 @@ public static class MeldOptimizer
             Audits              = audits,
             TotalProjectedGain  = totalGain,
         };
+    }
+
+    /// <summary>
+    /// Audit shape for DoH/DoL: every filled slot reads back as a Good,
+    /// value-only row so the UI renders melds without judging them.
+    /// </summary>
+    private static OptimizerResult DisplayOnlyResult(IReadOnlyList<MeldablePiece> pieces)
+    {
+        var audits = new List<MeldAudit>();
+        foreach (var piece in pieces)
+        {
+            foreach (var slot in piece.Slots)
+            {
+                if (slot.IsEmpty || slot.Current is null) continue;
+                var current = slot.Current.Value;
+                if (current.Stat == Substat.None) continue;
+
+                audits.Add(new MeldAudit(
+                    Piece     : piece.Slot,
+                    PieceName : piece.Name,
+                    SlotIndex : slot.SlotIndex,
+                    Current   : current,
+                    Severity  : AuditSeverity.Good,
+                    Headline  : "Solid",
+                    Detail    : $"+{current.Value} {current.Stat.Display()}"));
+            }
+        }
+        return new OptimizerResult { Audits = audits };
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -105,7 +141,10 @@ public static class MeldOptimizer
     {
         var recs = new List<MeldRecommendation>();
 
-        // Working copies of stat totals — we modify these as we plan melds
+        // Working copies of stat totals — we modify these as we plan melds.
+        // DoH/DoL entries are present defensively: with the six stats now in
+        // the Substat enum, a stray craft meld on a battle job must index
+        // safely instead of throwing KeyNotFound.
         var workingStats = new Dictionary<Substat, int>
         {
             [Substat.CriticalHit]   = stats.Crit,
@@ -115,6 +154,12 @@ public static class MeldOptimizer
             [Substat.SpellSpeed]    = stats.SpS,
             [Substat.Tenacity]      = stats.Ten,
             [Substat.Piety]         = stats.Pie,
+            [Substat.Craftsmanship] = stats.Craftsmanship,
+            [Substat.Control]       = stats.Control,
+            [Substat.CP]            = stats.CP,
+            [Substat.Gathering]     = stats.Gathering,
+            [Substat.Perception]    = stats.Perception,
+            [Substat.GP]            = stats.GP,
         };
 
         // Working copy of per-piece meld totals (to track overcap during planning).
@@ -257,7 +302,8 @@ public static class MeldOptimizer
     {
         var audits = new List<MeldAudit>();
 
-        // Build per-stat totals (current state, no projections)
+        // Build per-stat totals (current state, no projections). DoH/DoL
+        // entries present defensively — see GeneratePlan's workingStats note.
         var totals = new Dictionary<Substat, int>
         {
             [Substat.CriticalHit]   = stats.Crit,
@@ -267,6 +313,12 @@ public static class MeldOptimizer
             [Substat.SpellSpeed]    = stats.SpS,
             [Substat.Tenacity]      = stats.Ten,
             [Substat.Piety]         = stats.Pie,
+            [Substat.Craftsmanship] = stats.Craftsmanship,
+            [Substat.Control]       = stats.Control,
+            [Substat.CP]            = stats.CP,
+            [Substat.Gathering]     = stats.Gathering,
+            [Substat.Perception]    = stats.Perception,
+            [Substat.GP]            = stats.GP,
         };
 
         foreach (var piece in pieces)

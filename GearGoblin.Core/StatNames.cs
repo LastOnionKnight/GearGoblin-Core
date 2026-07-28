@@ -47,6 +47,14 @@ public static class StatNames
     public const string Tenacity   = "TEN";
     public const string Piety      = "PIE";
 
+    // v1.5.8 — DoH/DoL keys (crafting-gathering spec).
+    public const string Craftsmanship = "CMS";
+    public const string Control       = "CTL";
+    public const string CP            = "CP";
+    public const string Gathering     = "GAT";
+    public const string Perception    = "PER";
+    public const string GP            = "GP";
+
     /// <summary>
     /// Convert any plugin-emitted or hand-typed substat name into its
     /// canonical three-letter form. Returns an empty string for
@@ -91,6 +99,19 @@ public static class StatNames
             "PIE" or "PTY" or "PIETY"
                 => Piety,
 
+            "CMS" or "CRAFT" or "CRAFTSMANSHIP"
+                => Craftsmanship,
+            "CTL" or "CONTROL"
+                => Control,
+            "CP"
+                => CP,
+            "GAT" or "GATH" or "GATHERING"
+                => Gathering,
+            "PER" or "PCP" or "PERCEPTION"
+                => Perception,
+            "GP"
+                => GP,
+
             _ => s,
         };
     }
@@ -103,14 +124,20 @@ public static class StatNames
     /// </summary>
     public static string DisplayName(string canonicalKey) => canonicalKey switch
     {
-        Crit       => "Critical Hit",
-        DirectHit  => "Direct Hit Rate",
-        Det        => "Determination",
-        SkillSpeed => "Skill Speed",
-        SpellSpeed => "Spell Speed",
-        Tenacity   => "Tenacity",
-        Piety      => "Piety",
-        _          => canonicalKey ?? string.Empty,
+        Crit          => "Critical Hit",
+        DirectHit     => "Direct Hit Rate",
+        Det           => "Determination",
+        SkillSpeed    => "Skill Speed",
+        SpellSpeed    => "Spell Speed",
+        Tenacity      => "Tenacity",
+        Piety         => "Piety",
+        Craftsmanship => "Craftsmanship",
+        Control       => "Control",
+        CP            => "CP",
+        Gathering     => "Gathering",
+        Perception    => "Perception",
+        GP            => "GP",
+        _             => canonicalKey ?? string.Empty,
     };
 
     /// <summary>
@@ -118,10 +145,22 @@ public static class StatNames
     /// known substat keys. Useful for filtering wire payloads.
     /// </summary>
     public static bool IsKnown(string? canonicalKey) =>
-        canonicalKey == Crit       || canonicalKey == DirectHit
-     || canonicalKey == Det        || canonicalKey == SkillSpeed
-     || canonicalKey == SpellSpeed || canonicalKey == Tenacity
-     || canonicalKey == Piety;
+        canonicalKey == Crit          || canonicalKey == DirectHit
+     || canonicalKey == Det           || canonicalKey == SkillSpeed
+     || canonicalKey == SpellSpeed    || canonicalKey == Tenacity
+     || canonicalKey == Piety         || canonicalKey == Craftsmanship
+     || canonicalKey == Control       || canonicalKey == CP
+     || canonicalKey == Gathering     || canonicalKey == Perception
+     || canonicalKey == GP;
+
+    /// <summary>
+    /// Whether this canonical key is one of the six DoH/DoL stats.
+    /// Callers use this to gate battle-only logic (cap math, formulas).
+    /// </summary>
+    public static bool IsCraftGather(string? canonicalKey) =>
+        canonicalKey == Craftsmanship || canonicalKey == Control
+     || canonicalKey == CP            || canonicalKey == Gathering
+     || canonicalKey == Perception    || canonicalKey == GP;
 
     /// <summary>
     /// Is this stat a "Speed" stat (Skill Speed or Spell Speed)?
