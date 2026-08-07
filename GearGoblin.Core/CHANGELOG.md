@@ -1,3 +1,10 @@
+# Changelog
+
+## [1.6.0] - 2026-08-07
+
+### Changed
+- Version bump for trinity lockstep.
+
 ## [1.5.7c] - 2026-07-06
 
 ### Changed
@@ -17,8 +24,6 @@
 
 ### Changed
 - Version bump for trinity lockstep (plugin Phase 4 ui overhaul).
-
-# Changelog
 
 ## [1.2.0] - 2026-06-01
 
