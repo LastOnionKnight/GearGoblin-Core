@@ -11,10 +11,10 @@
     <AssemblyName>GearGoblin.Core</AssemblyName>
     <RootNamespace>GearGoblin.Core</RootNamespace>
 
-    <Version>1.6.1.0</Version>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
-    <FileVersion>1.6.1.0</FileVersion>
-    <InformationalVersion>1.6.1</InformationalVersion>
+    <Version>1.6.2.0</Version>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
+    <FileVersion>1.6.2.0</FileVersion>
+    <InformationalVersion>1.6.2</InformationalVersion>
     <PackageId>GearGoblin.Core</PackageId>
     <Authors>LastOnionKnight</Authors>
     <Description>Shared netstandard2.0 optimizer and formula library for the Tonberry Tactics Dalamud plugin and Blazor WebAssembly companion. Provides job profiles, stat formulas, materia data, cap logic, export contracts, and the shared meld optimizer/audit engine.</Description>

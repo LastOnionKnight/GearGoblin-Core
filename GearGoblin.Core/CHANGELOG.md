@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.6.2] - 2026-08-20
 
 ### Fixed
 - Corrected the combat-substat materia projection table used for hypothetical/new meld recommendations. The previous `Materia/Materias.cs` table incorrectly projected Materia XII as +96; current combat Materia XII is +54. The shared table now uses the actual I-XII progression: +1, +2, +3, +4, +6, +16, +8, +24, +12, +36, +18, +54.

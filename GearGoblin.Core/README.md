@@ -1,7 +1,7 @@
 # GearGoblin.Core
 
-**Current released version: 1.6.1**  
-**Current `main`: unreleased stabilization work for the next lockstep release**
+**Current released version: 1.6.2**  
+**Current `main`: unreleased 1.7 solver foundation work**
 
 `GearGoblin.Core` is the shared business-logic library used by both Tonberry Tactics front ends:
 
