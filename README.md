@@ -104,9 +104,9 @@ GearGoblin, GearGoblin.Core, and TonberryTactics use **trinity lockstep** for re
 Current tagged release:
 
 ```text
-GearGoblin plugin     1.6.1
-GearGoblin.Core       1.6.1
-TonberryTactics web   1.6.1
+GearGoblin plugin     1.6.2
+GearGoblin.Core       1.6.2
+TonberryTactics web   1.6.2
 ```
 
 Current `main` may contain unreleased stabilization fixes ahead of that tag. Release notes/changelogs should distinguish tagged releases from `Unreleased` work rather than rewriting history.
