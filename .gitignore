@@ -1,8 +1,14 @@
-﻿[Bb]in/
+[Bb]in/
 [Oo]bj/
 *.log
 *.user
 *.suo
 .vs/
 .vscode/
+.idea/
+*.nupkg
+*.snupkg
 *-dropin.zip
+*-dropin/
+*.rar
+*.patch
