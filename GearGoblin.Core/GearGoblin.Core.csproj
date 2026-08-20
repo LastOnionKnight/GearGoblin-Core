@@ -17,7 +17,7 @@
     <InformationalVersion>1.6.1</InformationalVersion>
     <PackageId>GearGoblin.Core</PackageId>
     <Authors>LastOnionKnight</Authors>
-    <Description>GearGoblin.Core — netstandard2.0 formula/data library shared between the Tonberry Tactics plugin and the web companion. v0.6.7.2 is a version-only lockstep bump (no source changes) restoring trinity coherence with plugin v0.6.7.2 and web v0.6.7.2. Wire-format/contract layer today; absorbs the materia optimizer math at v0.7.0.</Description>
+    <Description>Shared netstandard2.0 optimizer and formula library for the Tonberry Tactics Dalamud plugin and Blazor WebAssembly companion. Provides job profiles, stat formulas, materia data, cap logic, export contracts, and the shared meld optimizer/audit engine.</Description>
     <Copyright>(c) 2026 LastOnionKnight / Refia Rakkiri / Aisling O'Callaghan</Copyright>
     <RepositoryUrl>https://github.com/LastOnionKnight/GearGoblin-Core</RepositoryUrl>
     <PackageProjectUrl>https://github.com/LastOnionKnight/GearGoblin-Core</PackageProjectUrl>
@@ -33,8 +33,3 @@
   </ItemGroup>
 
 </Project>
-
-
-
-
-
