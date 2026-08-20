@@ -1,13 +1,15 @@
 # Changelog
 
-## [1.6.1] - 2026-08-14
+## [Unreleased]
 
 ### Fixed
 - Corrected the combat-substat materia projection table used for hypothetical/new meld recommendations. The previous `Materia/Materias.cs` table incorrectly projected Materia XII as +96; current combat Materia XII is +54. The shared table now uses the actual I-XII progression: +1, +2, +3, +4, +6, +16, +8, +24, +12, +36, +18, +54.
 - Removed the duplicate tier-value table from `Materia/Materias.cs`. `MateriaCatalog` now delegates hypothetical meld values to `MateriaTiers`, leaving one shared source of truth for plugin and web projections. Existing meld values remain Lumina-derived at inventory read time.
 
+## [1.6.1] - 2026-08-14
+
 ### Changed
-- Version remains 1.6.1 for trinity lockstep with the GearGoblin plugin and Tonberry Tactics web companion following the 2026-08-11 FFXIV patch update.
+- Version bump for trinity lockstep with the GearGoblin plugin and Tonberry Tactics web companion following the 2026-08-11 FFXIV patch update.
 
 ## [1.6.0] - 2026-08-07
 
